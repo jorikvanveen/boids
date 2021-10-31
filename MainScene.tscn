@@ -10,28 +10,28 @@
 position = Vector2( 99.594, 254.491 )
 
 [node name="Boid5" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 431.008, 188.564 )
+position = Vector2( 707.563, 208.385 )
 
 [node name="Boid6" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 367.755, 348.926 )
+position = Vector2( 518.775, 461.247 )
 
 [node name="Boid7" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 214.52, 180.546 )
+position = Vector2( 926.201, 106.924 )
 
 [node name="Boid8" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 493.371, 326.653 )
+position = Vector2( 845.436, 433.311 )
 
 [node name="Boid9" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 302.719, 70.9655 )
+position = Vector2( 541.519, 68.1339 )
 
 [node name="Boid10" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 169.975, 296.363 )
+position = Vector2( 206.786, 475.699 )
 
 [node name="Boid11" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 288.465, 198.364 )
+position = Vector2( 412.113, 221.017 )
 
 [node name="Boid3" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 123.143, 120.897 )
+position = Vector2( 265.668, 99.1879 )
 
 [node name="Boid4" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 99.7183, 120.755 )
+position = Vector2( 333.799, 343.509 )

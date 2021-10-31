@@ -1,3 +1,4 @@
+tool
 extends KinematicBody2D
 
 const E = 2.71828
@@ -12,6 +13,12 @@ var velocity = Vector2(1, 1) * SPEED
 var middle_indicator = Circle.new()
 
 func _ready():
+	if Engine.editor_hint:
+		var circle = Circle.new()
+		circle.RADIUS = VISUAL_RANGE
+		add_child(circle)
+		return
+
 	middle_indicator.RADIUS = 10
 	middle_indicator.COLOR = Color.red
 	# Spawn circle
@@ -24,6 +31,8 @@ func _ready():
 	print("ANGLES")
 	print(rad2deg(Vector2(1, 1).angle_to(Vector2(1, 0))))
 	velocity = velocity.rotated(deg2rad(rand_range(0, 360)))
+
+	
 
 	
 
@@ -49,6 +58,8 @@ func get_close_boids() -> Array:
 	return close_boids
 
 func _physics_process(delta):
+	if Engine.editor_hint:
+		return
 	# Get boids close to us
 	var close_boids = get_close_boids()	
 
@@ -81,4 +92,3 @@ func _physics_process(delta):
 	rotation = velocity.angle() + deg2rad(90)
 	# Wraparound
 	position = Vector2(fposmod(position.x, WRAPAROUND_X), fposmod(position.y, WRAPAROUND_Y))
-	
