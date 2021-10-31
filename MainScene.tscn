@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/boid/Boid.tscn" type="PackedScene" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Boids" type="Node" parent="."]
+
+[node name="Boid2" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 99.594, 254.491 )
+
+[node name="Boid5" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 431.008, 188.564 )
+
+[node name="Boid6" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 367.755, 348.926 )
+
+[node name="Boid7" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 214.52, 180.546 )
+
+[node name="Boid8" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 493.371, 326.653 )
+
+[node name="Boid9" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 302.719, 70.9655 )
+
+[node name="Boid10" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 169.975, 296.363 )
+
+[node name="Boid11" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 288.465, 198.364 )
+
+[node name="Boid3" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 123.143, 120.897 )
+
+[node name="Boid4" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 99.7183, 120.755 )
