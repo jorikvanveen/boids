@@ -1,4 +1,3 @@
-tool
 extends KinematicBody2D
 
 const E = 2.71828
@@ -64,13 +63,14 @@ func _physics_process(delta):
 	var close_boids = get_close_boids()	
 
 	# Get best vector for cohesion, (the average of all boids around us)
-	var average_velocity = self.velocity
+#	var average_velocity = self.velocity
+	var average_velocity = Vector2.ZERO
 	var average_position = self.position
 	for boid in close_boids:
 		average_velocity += boid.velocity
 		average_position += boid.position
 
-	#average_velocity = average_velocity / (close_boids.size()+1)
+	average_velocity = average_velocity / (close_boids.size())
 	average_position = average_position / (close_boids.size()+1)
 	middle_indicator.POSITION = to_local(average_position)
 	middle_indicator.update()
@@ -86,7 +86,10 @@ func _physics_process(delta):
 	# Get best vector for seperation
 	# Get best vector for alignment
 	# Average out all these vectors
+	
 	velocity = velocity.rotated(cohesion_angle_correction)
+#	velocity = velocity.linear_interpolate(average_velocity, 0)
+	velocity = velocity + (average_velocity - velocity) * 0.05
 	translate(velocity * delta)
 	# Change rotation based on velocity
 	rotation = velocity.angle() + deg2rad(90)
