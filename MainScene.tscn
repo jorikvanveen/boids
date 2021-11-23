@@ -11,6 +11,9 @@ script = ExtResource( 2 )
 [node name="Boid2" parent="Boids" instance=ExtResource( 1 )]
 position = Vector2( 99.594, 254.491 )
 
+[node name="Boid3" parent="Boids" instance=ExtResource( 1 )]
+position = Vector2( 142.668, 256.188 )
+
 [node name="Boid5" parent="Boids" instance=ExtResource( 1 )]
 position = Vector2( 707.563, 208.385 )
 
@@ -24,16 +27,13 @@ position = Vector2( 926.201, 106.924 )
 position = Vector2( 845.436, 433.311 )
 
 [node name="Boid9" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 541.519, 68.1339 )
+position = Vector2( 118.519, 210.134 )
 
 [node name="Boid10" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 206.786, 475.699 )
+position = Vector2( 153.786, 307.699 )
 
 [node name="Boid11" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 412.113, 221.017 )
-
-[node name="Boid3" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 265.668, 99.1879 )
+position = Vector2( 95.113, 184.017 )
 
 [node name="Boid4" parent="Boids" instance=ExtResource( 1 )]
-position = Vector2( 333.799, 343.509 )
+position = Vector2( 122.799, 311.509 )
