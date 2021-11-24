@@ -22,6 +22,7 @@ var nearby = []
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	input_pickable = true
 	if Engine.editor_hint:
 		var circle = Circle.new()
 		circle.RADIUS = VISUAL_RANGE
@@ -145,3 +146,8 @@ func physics_thread(delta):
 	var next_pos = position + (velocity * delta)
 	#next_pos = Vector2(fposmod(next_pos.x, WRAPAROUND_X), fposmod(next_pos.y, WRAPAROUND_Y))
 	set_deferred("position", next_pos)
+
+
+func _on_Boid_input_event(viewport:Node, event:InputEvent, shape_idx:int):
+	if event is InputEventMouseButton:
+		print("Click")
