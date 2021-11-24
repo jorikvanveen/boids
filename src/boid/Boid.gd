@@ -1,17 +1,19 @@
-extends KinematicBody2D
+extends StaticBody2D
 
-export var VISUAL_RANGE = 70.0
-export var SPEED = 100
+export var VISUAL_RANGE = 50.0
+export var SPEED = 300
 
 export var WRAPAROUND_Y = 600.0
 export var WRAPAROUND_X = 1024.0
 
-export var AVOID_MIN_DIST = 40
+export var AVOID_MIN_DIST = 30
 
-export var AVOID_FAC = 6000
+export var AVOID_FAC = 12000
 export var COHESION_FAC = 10
 export var ALIGNMENT_FAC = 10
 export var NOISE_FAC = 1000
+
+export var OUT_OF_BOUNDS_DIST = 100
 
 var velocity = Vector2(1, 1) * SPEED
 var middle_indicator = Circle.new()
@@ -42,13 +44,15 @@ func _ready():
 
 func get_nearby_boids():
 	nearby = []
+	var dist_squared = VISUAL_RANGE * VISUAL_RANGE
 	for boid in get_parent().get_children():
 		if boid == self:
 			continue
 		
-		var distance = position.distance_to(boid.position)
+		# Squared so it doesn't have to take the square root every frame and we save some cpu power
+		var distance = position.distance_squared_to(boid.position)
 
-		if distance < VISUAL_RANGE:
+		if distance < dist_squared:
 			nearby.push_back(boid)
 
 func average_pos_nearby() -> Vector2:
@@ -76,7 +80,22 @@ func avoidance_bias() -> Vector2:
 		return velocity
 	
 	return ideal_vec / nearby.size() * AVOID_FAC
-		
+
+func anti_out_of_bounds() -> Vector2:
+	var ideal_vec = Vector2.ZERO
+	if WRAPAROUND_Y - position.y < OUT_OF_BOUNDS_DIST:
+		ideal_vec.y = -1
+	
+	if position.y < OUT_OF_BOUNDS_DIST:
+		ideal_vec.y = 1
+
+	if WRAPAROUND_X - position.x < OUT_OF_BOUNDS_DIST:
+		ideal_vec.x = -1
+
+	if position.x < OUT_OF_BOUNDS_DIST:
+		ideal_vec.x = 1
+
+	return ideal_vec
 
 func cohesion_bias() -> Vector2:
 	var ideal_vec = (average_pos_nearby() - position)
@@ -95,11 +114,7 @@ func alignment_bias() -> Vector2:
 	average_velocity /= nearby.size()
 	return average_velocity * ALIGNMENT_FAC
 
-func noise_bias() -> Vector2:
-	var random_angle = rng.randf_range(-PI, PI)
-	return Vector2(sin(random_angle), cos(random_angle)) * NOISE_FAC
-
-func _physics_process(delta):
+func physics_thread(delta):
 	get_nearby_boids()
 
 	# Every bias function returns the optimal vector that they want to be in.
@@ -108,13 +123,17 @@ func _physics_process(delta):
 	var alignment = alignment_bias()
 	var cohesion = cohesion_bias()
 	var avoidance = avoidance_bias()
-	var noise = noise_bias()
 
 	# The average of this vector
-	var ideal_velocity = (alignment + cohesion + avoidance + noise) / 4
+	var ideal_velocity = (alignment + cohesion + avoidance) / 3
 
-	# Interpolate our velocity by the ideal velocity with an alpha of 0.5 * second
-	velocity = velocity.linear_interpolate(ideal_velocity, 0.5 * delta)
+	# If we are almost or already out of bounds, pretty much take over the ideal velocity
+	var out_of_bounds_vec = anti_out_of_bounds()
+	if out_of_bounds_vec:
+		ideal_velocity = (ideal_velocity.normalized() * 0.3 + out_of_bounds_vec.normalized() * 0.7) * SPEED * 5
+
+	# Interpolate our velocity to the ideal velocity
+	velocity = velocity.linear_interpolate(ideal_velocity, SPEED/100 * delta)
 
 	# Scale new velocity to speed
 	velocity = velocity.normalized() * SPEED
@@ -124,6 +143,5 @@ func _physics_process(delta):
 
 	# Move boid with wraparound
 	var next_pos = position + (velocity * delta)
-	next_pos = Vector2(fposmod(next_pos.x, WRAPAROUND_X), fposmod(next_pos.y, WRAPAROUND_Y))
-	position = next_pos
-	pass
+	#next_pos = Vector2(fposmod(next_pos.x, WRAPAROUND_X), fposmod(next_pos.y, WRAPAROUND_Y))
+	set_deferred("position", next_pos)
