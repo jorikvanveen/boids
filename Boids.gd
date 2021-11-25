@@ -2,11 +2,12 @@ extends Node
 
 var threads = []
 
-const NUM_THREADS = 32
+
+var NUM_THREADS = OS.get_processor_count()
 const DO_THREADING = false
 func _ready():
 	var Boid = load("res://src/boid/Boid.tscn")
-	for _i in range(100):
+	for _i in range(20):
 		var boid = Boid.instance()
 		boid.position = Vector2(rand_range(0, 1000),rand_range(0,600))
 		add_child(boid)
@@ -52,3 +53,23 @@ func _physics_process(delta):
 		thread.wait_to_finish()
 
 	threads = []
+
+
+func _on_HSlider_value_changed(value, variable):
+	# Loop trough children and set each variable and label
+	for child in get_children():
+		child.set(variable, value)
+	get_node('../CheckBox/Speed/Label4').text = str(get_node('../CheckBox/Speed').value)
+	get_node('../CheckBox/VisualRange/Label4').text = str(get_node('../CheckBox/VisualRange').value)
+	get_node('../CheckBox/AvoidDistance/Label4').text = str(get_node('../CheckBox/AvoidDistance').value)
+	get_node('../CheckBox/Alignment/Label4').text = str(get_node('../CheckBox/Alignment').value)
+	get_node('../CheckBox/Cohesion/Label4').text = str(get_node('../CheckBox/Cohesion').value)
+
+
+# Hide sliders
+func _on_CheckBox_pressed():
+	for child in get_node('../CheckBox').get_children():
+		child.visible = !child.visible
+
+func _on_Pause_pressed():
+	get_tree().paused = !get_tree().paused

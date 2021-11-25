@@ -32,17 +32,17 @@ func _ready():
 	middle_indicator.RADIUS = 10
 	middle_indicator.COLOR = Color.red
 	# Spawn circle
-	#var circle = Circle.new()
-	#circle.RADIUS = VISUAL_RANGE
-	#add_child(circle)
-	#add_child(middle_indicator)
-	add_to_group("boids")
+#	var circle = Circle.new()
+#	circle.RADIUS = VISUAL_RANGE
+#	add_child(circle)
+#	add_child(middle_indicator)
+#	add_to_group("boids")
 
 	# Rotate random
 	rng.randomize()
 	var angle = rng.randf_range(-PI, PI)
 	velocity = Vector2(sin(angle), cos(angle)) * SPEED
-
+	
 func get_nearby_boids():
 	nearby = []
 	var dist_squared = VISUAL_RANGE * VISUAL_RANGE
@@ -114,10 +114,9 @@ func alignment_bias() -> Vector2:
 
 	average_velocity /= nearby.size()
 	return average_velocity * ALIGNMENT_FAC
-
+	
 func physics_thread(delta):
 	get_nearby_boids()
-
 	# Every bias function returns the optimal vector that they want to be in.
 	# That is multiplied by the factor of each of those biases
 	# Calculate the new velocity

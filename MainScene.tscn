@@ -4,5 +4,319 @@
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Label" type="Label" parent="."]
+margin_left = 30.1161
+margin_top = 10.4699
+margin_right = 107.116
+margin_bottom = 24.4699
+text = "Hide sliders"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_left = 2.77719
+margin_top = 4.65008
+margin_right = 26.7772
+margin_bottom = 28.6501
+pressed = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speed" type="HSlider" parent="CheckBox"]
+margin_left = 108.921
+margin_top = 559.982
+margin_right = 298.921
+margin_bottom = 575.982
+min_value = 50.0
+max_value = 1000.0
+step = 50.0
+value = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CheckBox/Speed"]
+margin_left = 156.515
+margin_top = 17.8605
+margin_right = 188.515
+margin_bottom = 31.8605
+text = "1000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CheckBox/Speed"]
+margin_left = 1.64334
+margin_top = 17.0695
+margin_right = 17.6433
+margin_bottom = 31.0695
+text = "50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CheckBox/Speed"]
+margin_left = -47.622
+margin_top = 1.5874
+margin_right = -7.62202
+margin_bottom = 15.5874
+text = "Speed"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="CheckBox/Speed"]
+margin_left = 196.044
+margin_top = 0.793701
+margin_right = 236.044
+margin_bottom = 14.7937
+text = "300"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VisualRange" type="HSlider" parent="CheckBox"]
+margin_left = 108.921
+margin_top = 523.01
+margin_right = 298.921
+margin_bottom = 539.01
+max_value = 300.0
+step = 10.0
+value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CheckBox/VisualRange"]
+margin_left = 156.515
+margin_top = 17.8605
+margin_right = 188.515
+margin_bottom = 31.8605
+text = "300"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CheckBox/VisualRange"]
+margin_left = 2.0
+margin_top = 17.0
+margin_right = 18.0
+margin_bottom = 31.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CheckBox/VisualRange"]
+margin_left = -85.4852
+margin_top = 1.14191
+margin_right = -5.48521
+margin_bottom = 15.1419
+text = "Visual Range"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="CheckBox/VisualRange"]
+margin_left = 196.0
+margin_top = 1.0
+margin_right = 236.0
+margin_bottom = 15.0
+text = "50"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AvoidDistance" type="HSlider" parent="CheckBox"]
+margin_left = 108.921
+margin_top = 483.322
+margin_right = 298.921
+margin_bottom = 499.322
+max_value = 200.0
+step = 5.0
+value = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CheckBox/AvoidDistance"]
+margin_left = 156.515
+margin_top = 17.8605
+margin_right = 188.515
+margin_bottom = 31.8605
+text = "200"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CheckBox/AvoidDistance"]
+margin_left = 2.0
+margin_top = 17.0
+margin_right = 18.0
+margin_bottom = 31.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CheckBox/AvoidDistance"]
+margin_left = -99.9743
+margin_top = 1.14191
+margin_right = -3.97432
+margin_bottom = 15.1419
+text = "Avoid Distance"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="CheckBox/AvoidDistance"]
+margin_left = 196.0
+margin_top = 1.0
+margin_right = 236.0
+margin_bottom = 15.0
+text = "30"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cohesion" type="HSlider" parent="CheckBox"]
+margin_left = 108.921
+margin_top = 410.877
+margin_right = 298.921
+margin_bottom = 426.877
+max_value = 20.0
+value = 10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CheckBox/Cohesion"]
+margin_left = 156.515
+margin_top = 17.8605
+margin_right = 188.515
+margin_bottom = 31.8605
+text = "20"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CheckBox/Cohesion"]
+margin_left = 2.0
+margin_top = 17.0
+margin_right = 18.0
+margin_bottom = 31.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CheckBox/Cohesion"]
+margin_left = -99.9743
+margin_top = 1.14191
+margin_right = -3.97432
+margin_bottom = 15.1419
+text = "Cohesion"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="CheckBox/Cohesion"]
+margin_left = 196.0
+margin_top = 1.0
+margin_right = 236.0
+margin_bottom = 15.0
+text = "10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Alignment" type="HSlider" parent="CheckBox"]
+margin_left = 108.921
+margin_top = 445.525
+margin_right = 298.921
+margin_bottom = 461.525
+max_value = 20.0
+value = 10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CheckBox/Alignment"]
+margin_left = 156.515
+margin_top = 17.8605
+margin_right = 188.515
+margin_bottom = 31.8605
+text = "20"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CheckBox/Alignment"]
+margin_left = 2.0
+margin_top = 17.0
+margin_right = 18.0
+margin_bottom = 31.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="CheckBox/Alignment"]
+margin_left = -99.9743
+margin_top = 1.14191
+margin_right = -3.97432
+margin_bottom = 15.1419
+text = "Alignment"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="CheckBox/Alignment"]
+margin_left = 196.0
+margin_top = 1.0
+margin_right = 236.0
+margin_bottom = 15.0
+text = "10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Boids" type="Node" parent="."]
 script = ExtResource( 2 )
+
+[node name="Pause" type="CheckBox" parent="."]
+pause_mode = 2
+process_priority = 1
+margin_left = 990.942
+margin_top = 7.54224
+margin_right = 1014.94
+margin_bottom = 31.5422
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Pause"]
+margin_left = -44.4644
+margin_top = 5.25146
+margin_right = -4.46442
+margin_bottom = 19.2515
+text = "Pause"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="CheckBox" to="Boids" method="_on_CheckBox_pressed"]
+[connection signal="value_changed" from="CheckBox/Speed" to="Boids" method="_on_HSlider_value_changed" binds= [ "SPEED" ]]
+[connection signal="value_changed" from="CheckBox/VisualRange" to="Boids" method="_on_HSlider_value_changed" binds= [ "VISUAL_RANGE" ]]
+[connection signal="value_changed" from="CheckBox/AvoidDistance" to="Boids" method="_on_HSlider_value_changed" binds= [ "AVOID_MIN_DIST" ]]
+[connection signal="value_changed" from="CheckBox/Cohesion" to="Boids" method="_on_HSlider_value_changed" binds= [ "AVOID_MIN_DIST" ]]
+[connection signal="value_changed" from="CheckBox/Alignment" to="Boids" method="_on_HSlider_value_changed" binds= [ "AVOID_MIN_DIST" ]]
+[connection signal="pressed" from="Pause" to="Boids" method="_on_Pause_pressed"]
