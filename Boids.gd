@@ -2,12 +2,11 @@ extends Node
 
 var threads = []
 
-
 var NUM_THREADS = OS.get_processor_count()
-const DO_THREADING = false
+const DO_THREADING = true
 func _ready():
 	var Boid = load("res://src/boid/Boid.tscn")
-	for _i in range(20):
+	for _i in range(100):
 		var boid = Boid.instance()
 		boid.position = Vector2(rand_range(0, 1000),rand_range(0,600))
 		add_child(boid)
@@ -57,8 +56,8 @@ func _physics_process(delta):
 
 func _on_HSlider_value_changed(value, variable):
 	# Loop trough children and set each variable and label
-	for child in get_children():
-		child.set(variable, value)
+	for boid in get_children():
+		boid.set(variable, value)
 	get_node('../CheckBox/Speed/Label4').text = str(get_node('../CheckBox/Speed').value)
 	get_node('../CheckBox/VisualRange/Label4').text = str(get_node('../CheckBox/VisualRange').value)
 	get_node('../CheckBox/AvoidDistance/Label4').text = str(get_node('../CheckBox/AvoidDistance').value)
@@ -72,4 +71,4 @@ func _on_CheckBox_pressed():
 		child.visible = !child.visible
 
 func _on_Pause_pressed():
-	get_tree().paused = !get_tree().paused
+	get_tree().paused = not get_tree().paused

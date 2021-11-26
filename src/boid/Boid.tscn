@@ -3,7 +3,7 @@
 [ext_resource path="res://src/boid/Boid.gd" type="Script" id=1]
 
 [node name="Boid" type="StaticBody2D"]
-scale = Vector2( 0.779005, 0.779005 )
+scale = Vector2( 0.594888, 0.594888 )
 script = ExtResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]

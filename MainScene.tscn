@@ -82,8 +82,7 @@ margin_left = 108.921
 margin_top = 523.01
 margin_right = 298.921
 margin_bottom = 539.01
-max_value = 300.0
-step = 10.0
+step = 2.0
 value = 50.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -94,7 +93,7 @@ margin_left = 156.515
 margin_top = 17.8605
 margin_right = 188.515
 margin_bottom = 31.8605
-text = "300"
+text = "100"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -135,8 +134,7 @@ margin_left = 108.921
 margin_top = 483.322
 margin_right = 298.921
 margin_bottom = 499.322
-max_value = 200.0
-step = 5.0
+step = 2.0
 value = 30.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -147,7 +145,8 @@ margin_left = 156.515
 margin_top = 17.8605
 margin_right = 188.515
 margin_bottom = 31.8605
-text = "200"
+text = "100
+"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -317,6 +316,6 @@ __meta__ = {
 [connection signal="value_changed" from="CheckBox/Speed" to="Boids" method="_on_HSlider_value_changed" binds= [ "SPEED" ]]
 [connection signal="value_changed" from="CheckBox/VisualRange" to="Boids" method="_on_HSlider_value_changed" binds= [ "VISUAL_RANGE" ]]
 [connection signal="value_changed" from="CheckBox/AvoidDistance" to="Boids" method="_on_HSlider_value_changed" binds= [ "AVOID_MIN_DIST" ]]
-[connection signal="value_changed" from="CheckBox/Cohesion" to="Boids" method="_on_HSlider_value_changed" binds= [ "AVOID_MIN_DIST" ]]
-[connection signal="value_changed" from="CheckBox/Alignment" to="Boids" method="_on_HSlider_value_changed" binds= [ "AVOID_MIN_DIST" ]]
+[connection signal="value_changed" from="CheckBox/Cohesion" to="Boids" method="_on_HSlider_value_changed" binds= [ "COHESION_FAC" ]]
+[connection signal="value_changed" from="CheckBox/Alignment" to="Boids" method="_on_HSlider_value_changed" binds= [ "ALIGNMENT_FAC" ]]
 [connection signal="pressed" from="Pause" to="Boids" method="_on_Pause_pressed"]

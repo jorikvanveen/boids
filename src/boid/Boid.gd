@@ -6,20 +6,22 @@ export var SPEED = 300
 export var WRAPAROUND_Y = 600.0
 export var WRAPAROUND_X = 1024.0
 
-export var AVOID_MIN_DIST = 30
+export var AVOID_MIN_DIST = 300
 
-export var AVOID_FAC = 12000
-export var COHESION_FAC = 10
-export var ALIGNMENT_FAC = 10
+export var AVOID_FAC = 50
+export var COHESION_FAC = 75
+export var ALIGNMENT_FAC = 50
 export var NOISE_FAC = 1000
 
-export var OUT_OF_BOUNDS_DIST = 100
+export var OUT_OF_BOUNDS_DIST = 20
 
 var velocity = Vector2(1, 1) * SPEED
 var middle_indicator = Circle.new()
 var nearby = []
+var closest_distance = 0
 
 var rng = RandomNumberGenerator.new()
+var center
 
 func _ready():
 	input_pickable = true
@@ -32,19 +34,21 @@ func _ready():
 	middle_indicator.RADIUS = 10
 	middle_indicator.COLOR = Color.red
 	# Spawn circle
-#	var circle = Circle.new()
-#	circle.RADIUS = VISUAL_RANGE
-#	add_child(circle)
-#	add_child(middle_indicator)
-#	add_to_group("boids")
+	#var circle = Circle.new()
+	#circle.RADIUS = VISUAL_RANGE
+	#add_child(circle)
+	#add_child(middle_indicator)
+	#add_to_group("boids")
 
 	# Rotate random
 	rng.randomize()
 	var angle = rng.randf_range(-PI, PI)
 	velocity = Vector2(sin(angle), cos(angle)) * SPEED
+	center = Vector2(WRAPAROUND_X/2, WRAPAROUND_Y/2)
 	
 func get_nearby_boids():
 	nearby = []
+	closest_distance = 1e20
 	var dist_squared = VISUAL_RANGE * VISUAL_RANGE
 	for boid in get_parent().get_children():
 		if boid == self:
@@ -52,9 +56,13 @@ func get_nearby_boids():
 		
 		# Squared so it doesn't have to take the square root every frame and we save some cpu power
 		var distance = position.distance_squared_to(boid.position)
+		if distance < closest_distance:
+			closest_distance = distance
 
 		if distance < dist_squared:
 			nearby.push_back(boid)
+	
+	closest_distance = sqrt(closest_distance)
 
 func average_pos_nearby() -> Vector2:
 	var average_position = Vector2.ZERO
@@ -70,33 +78,26 @@ func average_pos_nearby() -> Vector2:
 	return average_position
 
 func avoidance_bias() -> Vector2:
-	var ideal_vec = Vector2.ZERO
+	var least_ideal_position = average_pos_nearby()
+	var ideal_vector = (position - least_ideal_position) 
 
-	for boid in nearby:
-		var dist = position.distance_to(boid.position)
-		if dist < AVOID_MIN_DIST:
-			ideal_vec += (position - boid.position) * (1/dist)
+	if closest_distance < AVOID_MIN_DIST:
+		return ideal_vector * AVOID_FAC
 
-	if not ideal_vec:
-		return velocity
-	
-	return ideal_vec / nearby.size() * AVOID_FAC
+	return velocity
 
 func anti_out_of_bounds() -> Vector2:
-	var ideal_vec = Vector2.ZERO
-	if WRAPAROUND_Y - position.y < OUT_OF_BOUNDS_DIST:
-		ideal_vec.y = -1
+	var out_of_bounds = false
+	if WRAPAROUND_Y - position.y < OUT_OF_BOUNDS_DIST or position.y < OUT_OF_BOUNDS_DIST:
+		out_of_bounds = true
+
+	if WRAPAROUND_X - position.x < OUT_OF_BOUNDS_DIST or position.x < OUT_OF_BOUNDS_DIST:
+		out_of_bounds = true
 	
-	if position.y < OUT_OF_BOUNDS_DIST:
-		ideal_vec.y = 1
+	if out_of_bounds:
+		return (center - position)
 
-	if WRAPAROUND_X - position.x < OUT_OF_BOUNDS_DIST:
-		ideal_vec.x = -1
-
-	if position.x < OUT_OF_BOUNDS_DIST:
-		ideal_vec.x = 1
-
-	return ideal_vec
+	return Vector2.ZERO
 
 func cohesion_bias() -> Vector2:
 	var ideal_vec = (average_pos_nearby() - position)
