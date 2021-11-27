@@ -6,18 +6,20 @@ export var SPEED = 300
 export var WRAPAROUND_Y = 600.0
 export var WRAPAROUND_X = 1024.0
 
-export var AVOID_MIN_DIST = 15
+export var AVOID_MIN_DIST = 20
 
-export var AVOID_FAC = 50
-export var COHESION_FAC = 75
-export var ALIGNMENT_FAC = 50
+export var AVOID_FAC = 30
+export var COHESION_FAC = 30
+export var ALIGNMENT_FAC = 20
 export var NOISE_FAC = 1000
 
-export var OUT_OF_BOUNDS_DIST = 200
+export var OUT_OF_BOUNDS_DIST = 100
 
 var velocity = Vector2(1, 1) * SPEED
 var middle_indicator = Circle.new()
 var nearby = []
+var too_close = []
+var closest_boid
 var closest_distance = 0
 
 var rng = RandomNumberGenerator.new()
@@ -48,8 +50,10 @@ func _ready():
 	
 func get_nearby_boids():
 	nearby = []
+	too_close = []
 	closest_distance = 1e20
 	var dist_squared = VISUAL_RANGE * VISUAL_RANGE
+	var too_close_squared = AVOID_MIN_DIST * AVOID_MIN_DIST
 	for boid in get_parent().get_children():
 		if boid == self:
 			continue
@@ -58,7 +62,10 @@ func get_nearby_boids():
 		var distance = position.distance_squared_to(boid.position)
 		if distance < closest_distance:
 			closest_distance = distance
+			closest_boid = boid
 
+		if distance < too_close_squared:
+			too_close.push_back(boid)
 		if distance < dist_squared:
 			nearby.push_back(boid)
 	
@@ -78,11 +85,9 @@ func average_pos_nearby() -> Vector2:
 	return average_position
 
 func avoidance_bias() -> Vector2:
-	var least_ideal_position = average_pos_nearby()
-	var ideal_vector = (position - least_ideal_position) 
-
 	if closest_distance < AVOID_MIN_DIST:
-		return ideal_vector * AVOID_FAC
+		var ideal_vec = (position - closest_boid.position) 
+		return ideal_vec / pow(ideal_vec.length(), 2) * AVOID_FAC * 1000
 
 	return velocity
 
@@ -97,7 +102,7 @@ func anti_out_of_bounds() -> Vector2:
 	if out_of_bounds:
 		return (center - position)
 
-	return Vector2.ZERO
+	return velocity
 
 func cohesion_bias() -> Vector2:
 	var ideal_vec = (average_pos_nearby() - position)
@@ -137,7 +142,8 @@ func physics_thread(delta):
 	velocity = velocity.linear_interpolate(ideal_velocity, SPEED/100 * delta)
 
 	# Scale new velocity to speed
-	velocity = velocity.normalized() * SPEED
+	if velocity.length() > SPEED:
+		velocity = velocity.normalized() * SPEED
 
 	# Render rotation
 	rotation = velocity.angle() + 0.5*PI
