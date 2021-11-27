@@ -1,19 +1,19 @@
 extends StaticBody2D
 
-export var VISUAL_RANGE = 50.0
+export var VISUAL_RANGE = 40.0
 export var SPEED = 300
 
 export var WRAPAROUND_Y = 600.0
 export var WRAPAROUND_X = 1024.0
 
-export var AVOID_MIN_DIST = 300
+export var AVOID_MIN_DIST = 15
 
 export var AVOID_FAC = 50
 export var COHESION_FAC = 75
 export var ALIGNMENT_FAC = 50
 export var NOISE_FAC = 1000
 
-export var OUT_OF_BOUNDS_DIST = 20
+export var OUT_OF_BOUNDS_DIST = 200
 
 var velocity = Vector2(1, 1) * SPEED
 var middle_indicator = Circle.new()
@@ -131,7 +131,7 @@ func physics_thread(delta):
 	# If we are almost or already out of bounds, pretty much take over the ideal velocity
 	var out_of_bounds_vec = anti_out_of_bounds()
 	if out_of_bounds_vec:
-		ideal_velocity = (ideal_velocity.normalized() * 0.3 + out_of_bounds_vec.normalized() * 0.7) * SPEED * 5
+		ideal_velocity = (ideal_velocity.normalized() * 0.7 + out_of_bounds_vec.normalized() * 0.3) * SPEED * 5
 
 	# Interpolate our velocity to the ideal velocity
 	velocity = velocity.linear_interpolate(ideal_velocity, SPEED/100 * delta)
