@@ -20,7 +20,6 @@ func run_physics_threads(args):
 func _physics_process(delta):
 	# Run every physics process of the boids on a seperate thread
 
-
 	# Divide boids into different arrays
 	var children = get_children()
 	
