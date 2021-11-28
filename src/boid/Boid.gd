@@ -8,7 +8,7 @@ export var WRAPAROUND_X = 1024.0
 
 export var AVOID_MIN_DIST = 20
 
-export var AVOID_FAC = 30
+export var AVOID_FAC = 25
 export var COHESION_FAC = 30
 export var ALIGNMENT_FAC = 20
 export var NOISE_FAC = 1000
@@ -100,7 +100,7 @@ func anti_out_of_bounds() -> Vector2:
 		out_of_bounds = true
 	
 	if out_of_bounds:
-		return (center - position)
+		return (center - position).normalized() * 10
 
 	return velocity
 

@@ -31,7 +31,7 @@ margin_right = 298.921
 margin_bottom = 575.982
 min_value = 50.0
 max_value = 1000.0
-step = 50.0
+step = 10.0
 value = 300.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -83,7 +83,7 @@ margin_top = 523.01
 margin_right = 298.921
 margin_bottom = 539.01
 step = 2.0
-value = 50.0
+value = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -135,7 +135,7 @@ margin_top = 483.322
 margin_right = 298.921
 margin_bottom = 499.322
 step = 2.0
-value = 30.0
+value = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -187,8 +187,8 @@ margin_left = 108.921
 margin_top = 410.877
 margin_right = 298.921
 margin_bottom = 426.877
-max_value = 20.0
-value = 10.0
+max_value = 60.0
+value = 30.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -198,7 +198,8 @@ margin_left = 156.515
 margin_top = 17.8605
 margin_right = 188.515
 margin_bottom = 31.8605
-text = "20"
+text = "60
+"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -240,8 +241,8 @@ margin_left = 108.921
 margin_top = 445.525
 margin_right = 298.921
 margin_bottom = 461.525
-max_value = 20.0
-value = 10.0
+max_value = 60.0
+value = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -251,7 +252,8 @@ margin_left = 156.515
 margin_top = 17.8605
 margin_right = 188.515
 margin_bottom = 31.8605
-text = "20"
+text = "60
+"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
